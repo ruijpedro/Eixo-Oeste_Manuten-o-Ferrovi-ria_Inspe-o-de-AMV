@@ -26,7 +26,9 @@ jobs:
           java-version: 21
 
       - name: Instalar dependências
-        run: npm install
+        run: |
+          npm install
+          npm install -D typescript
 
       - name: Preparar pasta www
         run: |
