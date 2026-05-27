@@ -1,0 +1,10 @@
+{
+  "name": "Eixo Oeste AMV RJP",
+  "short_name": "AMV RJP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef2f7",
+  "theme_color": "#082f5f",
+  "description": "Inspeção de AMV — Eixo Oeste Manutenção Ferroviária — Autor RJP",
+  "icons": []
+}

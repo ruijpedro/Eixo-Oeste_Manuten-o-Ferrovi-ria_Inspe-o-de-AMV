@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "npx http-server .",
+    "build": "echo static-pwa"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/cli": "^8.3.4",
+    "@capacitor/core": "^8.3.4",
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {}
+}

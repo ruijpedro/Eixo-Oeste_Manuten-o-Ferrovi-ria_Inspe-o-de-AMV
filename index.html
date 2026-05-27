@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eixo Oeste — AMV RJP</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="assets/a_clean_high_resolution_promotional_graphic_spl.png" onerror="this.src='assets/a_clean_graphic_design_presentation_image_with_a.png'" class="logo">
+    <div>
+      <h1>EIXO OESTE</h1>
+      <p>Manutenção Ferroviária · Inspeção de AMV</p>
+      <p>Autor: RJP · v0.3</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="assets/a_clean_vector_style_logo_on_a_brushed_metal_plate.png" class="hero-logo" onerror="this.style.display='none'">
+      <h2>INSPEÇÃO DE APARELHOS DE MUDANÇA DE VIA</h2>
+      <p>Ficha vertical inspirada na filosofia EBTCC, com estrutura AMV/MPS.</p>
+      <div class="grid">
+        <button class="btn" onclick="newInspection()">+ Nova Inspeção</button>
+        <button class="btn green" onclick="saveInspection()">Guardar</button>
+        <button class="btn grey" onclick="exportJSON()">Exportar JSON</button>
+        <button class="btn orange" onclick="printPDF()">Gerar PDF</button>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="amv" onclick="openTab('amv')">AMV</button>
+      <button class="tab" data-tab="mps" onclick="openTab('mps')">MPS</button>
+      <button class="tab" data-tab="medicoes" onclick="openTab('medicoes')">Medições</button>
+      <button class="tab" data-tab="historico" onclick="openTab('historico')">Histórico</button>
+    </nav>
+
+    <section id="amv" class="panel active">
+      <div class="badge okb">Linha do Oeste</div><div class="badge warnb">PK 21+190 a 191+197</div>
+      <section class="accordion open">
+        <div class="acc-head" onclick="toggleAcc(this)">1. Identificação do AMV <span>ABRIR</span></div>
+        <div class="acc-body">
+          <div class="form-grid">
+            <div><label>Linha / Ramal</label><select name="linha"><option>Linha do Oeste</option></select></div>
+            <div><label>PK</label><input name="pk" placeholder="ex.: 45+123"></div>
+            <div><label>Estação / Local</label><select name="estacao" id="estacao"><option>Selecionar</option></select></div>
+            <div><label>N.º AMV</label><input name="num_amv"></div>
+            <div><label>Tipo de AMV</label><select name="tipo_amv"><option>Selecionar</option><option>Aparelho simples direito</option><option>Aparelho simples esquerdo</option><option>Travessia</option><option>Outro</option></select></div>
+            <div><label>Via</label><input name="via"></div>
+            <div><label>Órgão responsável</label><input name="orgao" value="C.M Caldas da Rainha"></div>
+            <div><label>Inspetor</label><input name="inspetor" value="RJP"></div>
+            <div><label>Data da inspeção</label><input type="date" name="data"></div>
+            <div><label>Ação Sigma</label><input name="sigma"></div>
+            <div><label>RMM utilizados</label><input name="rmm"></div>
+            <div><label>Condições meteorológicas</label><input name="meteo"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="mps" class="panel">
+      <section class="hero"><h2>MPS — Inspeção MVS e Encravamentos</h2><p>Separadores hierárquicos conforme a filosofia do template.</p></section>
+      <div id="mpsContainer"></div>
+    </section>
+
+    <section id="medicoes" class="panel">
+      <section class="accordion open">
+        <div class="acc-head" onclick="toggleAcc(this)">Medições na Grade de Agulhas <span>ABRIR</span></div>
+        <div class="acc-body">
+          <div class="measure">
+            <div><label>d2 Direto</label><input name="d2" type="number" placeholder="mm"></div>
+            <div><label>d1 Desviado</label><input name="d1" type="number" placeholder="mm"></div>
+            <div><label>Observações</label><textarea name="obs_grade"></textarea></div>
+          </div>
+        </div>
+      </section>
+      <section class="accordion">
+        <div class="acc-head" onclick="toggleAcc(this)">Medições na Zona da Cróssima <span>ABRIR</span></div>
+        <div class="acc-body">
+          <div class="measure">
+            <div><label>m2 Direto</label><input name="m2" type="number" placeholder="mm"></div>
+            <div><label>m1 Desviado</label><input name="m1" type="number" placeholder="mm"></div>
+            <div><label>y2 / y1</label><input name="y" placeholder="mm"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="historico" class="panel">
+      <section class="hero"><h2>Histórico local</h2><div id="history"></div></section>
+    </section>
+  </main>
+
+  <footer class="footer">Eixo Oeste — Manutenção Ferroviária · Autor: RJP</footer>
+  <script src="src/data.js"></script>
+  <script src="src/app.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{});}</script>
+</body>
+</html>
