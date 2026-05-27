@@ -17,7 +17,7 @@ jobs:
       - name: Configurar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Configurar Java
         uses: actions/setup-java@v4
@@ -35,13 +35,7 @@ jobs:
           cp index.html manifest.webmanifest service-worker.js www/
           cp -r assets src www/
 
-      - name: Inicializar Capacitor se necessário
-        run: |
-          if [ ! -f capacitor.config.ts ]; then
-            npx cap init "Eixo Oeste AMV" "rjp.eixooeste.amv" --web-dir=www
-          fi
-
-      - name: Corrigir webDir
+      - name: Criar capacitor.config.ts
         run: |
           cat > capacitor.config.ts <<'EOF'
           import type { CapacitorConfig } from '@capacitor/cli';
@@ -60,6 +54,15 @@ jobs:
           rm -rf android
           npx cap add android
           npx cap sync android
+
+      - name: Aceitar licenças Android
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+
+      - name: Instalar SDK Platform 36
+        run: |
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+          "platforms;android-36" \
+          "build-tools;35.0.0"
 
       - name: Build APK
         run: |
