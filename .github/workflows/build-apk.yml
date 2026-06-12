@@ -36,6 +36,9 @@ jobs:
           mkdir -p www
           cp index.html manifest.webmanifest service-worker.js www/ 2>/dev/null || true
           cp -r assets src www/ 2>/dev/null || true
+          if [ ! -f www/index.html ]; then
+            echo "<!doctype html><html><body><h1>Eixo Oeste AMV</h1></body></html>" > www/index.html
+          fi
 
       - name: Criar capacitor.config.ts
         run: |

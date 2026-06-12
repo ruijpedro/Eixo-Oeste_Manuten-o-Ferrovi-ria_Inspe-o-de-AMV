@@ -1,0 +1,59 @@
+name: Build WebApp
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-webapp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Criar dist WebApp
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp index.html manifest.webmanifest service-worker.js dist/ 2>/dev/null || true
+          cp -r assets src dist/ 2>/dev/null || true
+          if [ ! -f dist/index.html ]; then
+            echo "<!doctype html><html><body><h1>Eixo Oeste AMV</h1></body></html>" > dist/index.html
+          fi
+
+      - name: Guardar WebApp como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Eixo_Oeste_AMV_RJP_webapp
+          path: dist
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload para GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Publicar WebApp
+        uses: actions/deploy-pages@v4
