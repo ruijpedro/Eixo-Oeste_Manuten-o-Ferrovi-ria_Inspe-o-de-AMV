@@ -9,19 +9,19 @@
 </head>
 <body>
   <header class="topbar">
-    <img src="assets/a_clean_high_resolution_promotional_graphic_spl.png" onerror="this.src='assets/a_clean_graphic_design_presentation_image_with_a.png'" class="logo">
+    <img src="assets/play_store_512.png" class="logo" alt="Logótipo AMV Oeste">
     <div>
       <h1>EIXO OESTE</h1>
       <p>Manutenção Ferroviária · Inspeção de AMV</p>
-      <p>Autor: RJP · v0.3</p>
+      <p>Autor: RJP · v0.7 HUB</p>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <img src="assets/a_clean_vector_style_logo_on_a_brushed_metal_plate.png" class="hero-logo" onerror="this.style.display='none'">
+      <img src="assets/1024.png" class="hero-logo" alt="Logótipo AMV Oeste">
       <h2>INSPEÇÃO DE APARELHOS DE MUDANÇA DE VIA</h2>
-      <p>Ficha vertical inspirada na filosofia EBTCC, com estrutura AMV/MPS.</p>
+      <p>Ficha vertical no ecossistema Manutenção Hub, com estrutura AMV/MPS e imagem IP.</p>
       <div class="grid">
         <button class="btn" onclick="newInspection()">+ Nova Inspeção</button>
         <button class="btn green" onclick="saveInspection()">Guardar</button>
@@ -66,6 +66,13 @@
     </section>
 
     <section id="medicoes" class="panel">
+
+      <div class="scheme-card">
+        <h3>Esquema técnico de medições AMV / MPS</h3>
+        <img class="scheme-img" src="assets/esquema_medicoes_amv_mps.png" alt="Esquema técnico de cotas d, m, y e bitola S">
+        <p class="template-note">Apoio visual para medições: cota d, cota m, cota y, bitola S e abertura/guiamento, conforme templates IP.MOD.052 e IP.MOD.057.</p>
+      </div>
+
       <section class="accordion open">
         <div class="acc-head" onclick="toggleAcc(this)">Medições na Grade de Agulhas <span>ABRIR</span></div>
         <div class="acc-body">
@@ -86,6 +93,23 @@
           </div>
         </div>
       </section>
+    
+      <section class="accordion open">
+        <div class="acc-head" onclick="toggleAcc(this)">Medições principais do AMV <span>ABRIR</span></div>
+        <div class="acc-body">
+          <div class="med-grid">
+            <div><label>Bitola S</label><input name="bitola_s" placeholder="mm"></div>
+            <div><label>Cota d</label><input name="cota_d" placeholder="mm"></div>
+            <div><label>Cota m</label><input name="cota_m" placeholder="mm"></div>
+            <div><label>Cota y</label><input name="cota_y" placeholder="mm"></div>
+            <div><label>Abertura C</label><input name="abertura_c" placeholder="mm"></div>
+            <div><label>Guiamento g</label><input name="guiamento_g" placeholder="mm"></div>
+          </div>
+          <label>Observações das medições</label>
+          <textarea name="obs_medicoes" placeholder="Regista aqui desvios, tolerâncias, anomalias ou necessidade de intervenção"></textarea>
+        </div>
+      </section>
+
     </section>
 
     <section id="historico" class="panel">

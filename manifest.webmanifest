@@ -1,10 +1,24 @@
 {
-  "name": "Eixo Oeste AMV RJP",
-  "short_name": "AMV RJP",
+  "name": "Eixo Oeste AMV",
+  "short_name": "AMV Oeste",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#eef2f7",
-  "theme_color": "#082f5f",
-  "description": "Inspeção de AMV — Eixo Oeste Manutenção Ferroviária — Autor RJP",
-  "icons": []
+  "background_color": "#ffffff",
+  "theme_color": "#00a99d",
+  "description": "Manutenção Hub — Inspeção de AMV — Autor RJP",
+  "icons": [
+    {
+      "src": "assets/play_store_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "./"
 }
