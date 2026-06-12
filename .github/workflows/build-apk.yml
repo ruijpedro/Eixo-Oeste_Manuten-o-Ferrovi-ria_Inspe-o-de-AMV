@@ -36,9 +36,6 @@ jobs:
           mkdir -p www
           cp index.html manifest.webmanifest service-worker.js www/ 2>/dev/null || true
           cp -r assets src www/ 2>/dev/null || true
-          if [ ! -f www/index.html ]; then
-            echo "<!doctype html><html><body><h1>Eixo Oeste AMV</h1></body></html>" > www/index.html
-          fi
 
       - name: Criar capacitor.config.ts
         run: |
@@ -60,24 +57,26 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: Instalar dependências Python
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install pillow
+
       - name: Aplicar nome e ícone
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image
-          import xml.etree.ElementTree as ET
 
-          # Android label
           manifest = Path("android/app/src/main/AndroidManifest.xml")
           txt = manifest.read_text()
           txt = txt.replace('android:label="@string/app_name"', 'android:label="Eixo Oeste AMV"')
-          txt = txt.replace('android:label="Eixo Oeste AMV"', 'android:label="Eixo Oeste AMV"')
           manifest.write_text(txt)
 
-          # Icons
           src = Path("assets/1024.png")
           if not src.exists():
               src = Path("assets/play_store_512.png")
+
           if src.exists():
               im = Image.open(src).convert("RGBA")
               sizes = {
@@ -90,8 +89,9 @@ jobs:
               for folder, size in sizes.items():
                   d = Path("android/app/src/main/res") / folder
                   d.mkdir(parents=True, exist_ok=True)
-                  im.resize((size, size), Image.LANCZOS).save(d / "ic_launcher.png")
-                  im.resize((size, size), Image.LANCZOS).save(d / "ic_launcher_round.png")
+                  icon = im.resize((size, size), Image.LANCZOS)
+                  icon.save(d / "ic_launcher.png")
+                  icon.save(d / "ic_launcher_round.png")
           PY
 
       - name: Aceitar licenças Android
